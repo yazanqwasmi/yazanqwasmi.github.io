@@ -113,19 +113,7 @@
             </div>
         </section>
         <!-- END HOME -->
-          <script>
-  window.watsonAssistantChatOptions = {
-      integrationID: "fe772ccb-9583-4777-b0e7-cc484eda796e", // The ID of this integration.
-      region: "us-south", // The region your integration is hosted in.
-      serviceInstanceID: "63567e6a-a6a5-4c40-b4d4-e8df8b8669ec", // The ID of your service instance.
-      onLoad: function(instance) { instance.render(); }
-    };
-  setTimeout(function(){
-    const t=document.createElement('script');
-    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
-    document.head.appendChild(t);
-  });
-</script>
+
       
                 <!-- START ABOUT -->
                 <section class="section" id="about">
@@ -680,6 +668,19 @@
                 <script src="js/jquery.magnific-popup.min.js"></script>
                 <!-- SWITCHER JS -->
                 <script src="js/switcher.js"></script>
+                <script>
+                    window.watsonAssistantChatOptions = {
+                    integrationID: "fe772ccb-9583-4777-b0e7-cc484eda796e", // The ID of this integration.
+                    region: "us-south", // The region your integration is hosted in.
+                    serviceInstanceID: "63567e6a-a6a5-4c40-b4d4-e8df8b8669ec", // The ID of your service instance.
+                    onLoad: function(instance) { instance.render(); }
+                    };
+            setTimeout(function(){
+             const t=document.createElement('script');
+                 t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+                    document.head.appendChild(t);
+                });
+                </script>
                 <!--TEXT ROTETE-->
                 <script src="js/jquery.simple-text-rotator.js"></script>
                 <!-- OWL CAROUSEL -->
