@@ -1,699 +1,409 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>yazan qwasmi</title>
+  <meta name="description" content="Yazan Qwasmi. Electrical engineer & builder. A small corner of the internet." />
+  <meta name="theme-color" content="#ece8dd" />
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Yazan Qwasmi</title>
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <meta name="author" content="Yazan Qwasmi" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
-        <link rel="shortcut icon" href="images/favicon.ico">
+  <style>
+    :root {
+      --bg:    #e9e4d6;   /* warm paper */
+      --ink:   #262019;   /* soft near-black, warm */
+      --dim:   #6b6353;   /* muted taupe, ~4.5:1 on paper */
+      --link:  #262019;   /* links are ink; they invert on hover */
+      --accent:#a44526;   /* warm terracotta accent, ~4.78:1 on --bg (WCAG AA) */
+      --mono:  "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    }
 
-        <!--Bootstrap Css-->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        <!-- Materialdesign icons Css -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    body {
+      min-height: 100dvh;
+      background: var(--bg);
+      background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.014) 0px, rgba(0,0,0,0.014) 1px,
+        transparent 1px, transparent 3px);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 15px;
+      line-height: 1.5;
+      display: grid;
+      grid-template-columns: minmax(0, 620px);
+      justify-content: center;
+      align-content: center;
+      padding: clamp(0.9rem, 4vw, 1.5rem);
+      overflow-x: hidden;
+    }
 
-        <!-- Mobirise icons Css -->
-        <link href="css/mobiriseicons.css" rel="stylesheet">
+    .win {
+      width: 100%;
+      min-width: 0;
+      background: var(--bg);
+      border: 1.5px solid var(--ink);
+      box-shadow: 6px 6px 0 var(--ink);
+      display: flex;
+      flex-direction: column;
+      max-height: min(88dvh, 760px);
+      animation: pop 0.5s cubic-bezier(.16,1,.3,1) both;
+    }
+    @keyframes pop {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-        <!-- Magnific-popup -->
-        <link rel="stylesheet" href="css/magnific-popup.css">
+    /* title bar */
+    .bar {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.45rem 0.7rem;
+      border-bottom: 1.5px solid var(--ink);
+      background: repeating-linear-gradient(to bottom,
+        var(--ink) 0, var(--ink) 1px, transparent 1px, transparent 3px);
+      flex: none;
+      min-width: 0;
+    }
+    .bar .geo { white-space: nowrap; }
+    @media (max-width: 400px) { .bar .geo { display: none; } }
+    .bar .dot { width: 11px; height: 11px; border: 1.5px solid var(--ink);
+      background: var(--bg); border-radius: 50%; }
+    .bar .title { margin: 0 auto; background: var(--bg); padding: 0 0.6rem;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.02em; }
+    .bar .geo { background: var(--bg); padding: 0 0.5rem; font-size: 11px;
+      color: var(--dim); letter-spacing: 0.03em; }
 
-        <!-- Animate Css -->
-        <link rel="stylesheet" href="css/animate.min.css">
+    /* screen */
+    .screen {
+      padding: clamp(0.9rem, 3vw, 1.3rem);
+      overflow-y: auto;
+      flex: 1;
+      cursor: text;
+      scrollbar-width: thin;
+    }
+    .screen::-webkit-scrollbar { width: 8px; }
+    .screen::-webkit-scrollbar-thumb { background: var(--dim); }
 
-        <!-- OWL SLIDER -->
-        <link rel="stylesheet" href="css/owl.carousel.css" />
-        <link rel="stylesheet" href="css/owl.theme.css" />
-        <link rel="stylesheet" href="css/owl.transitions.css" />
+    .line { white-space: pre-wrap; word-break: break-word; }
+    .echo { color: var(--dim); margin-top: 0.55rem; }
+    .echo .p { color: var(--accent); }
+    .name { font-size: clamp(1.5rem, 6vw, 2.1rem); font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 0.1rem; }
+    .quote { color: var(--ink); border-left: 2px solid var(--accent);
+      padding-left: 0.8rem; margin: 0.45rem 0 0.1rem; max-width: 46ch; }
+    .quote cite { display:block; margin-top: 0.25rem; color: var(--dim);
+      font-style: normal; font-size: 12.5px; letter-spacing: 0.04em; }
+    .muted { color: var(--dim); }
+    .accent { color: var(--accent); }
 
-        <!-- Custom style Css -->
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/color/default.css" rel="stylesheet" id="option-color">
+    .entry { margin: 0.3rem 0 0; }
+    .entry + .entry { margin-top: 0.7rem; }
+    .entry .h { font-weight: 700; }
+    .entry .sub { color: var(--dim); font-size: 13px; }
+    .entry .d { margin-top: 0.1rem; max-width: 54ch; }
+    .block { margin: 0.25rem 0 0.5rem; }
 
-    </head>
-    <body>
+    /* neofetch card */
+    .fetch { display: grid; gap: 0.1rem; }
+    .frow { display: flex; gap: 0.75rem; }
+    .frow .fk { color: var(--accent); flex: none; width: 5.5rem; }
+    .frow .fv { color: var(--ink); min-width: 0; }
 
-        <!-- Loader -->
-        <div id="preloader">
-            <div id="status">
-                <div class="spinner">Loading...</div>
-            </div>
-        </div>
+    a { color: var(--link); text-decoration: underline; text-underline-offset: 3px;
+      text-decoration-color: var(--accent); }
+    a:hover, a:focus-visible { background: var(--ink); color: var(--bg);
+      text-decoration: none; outline: none; }
 
-        <!-- Start Navbar -->
-        <nav class="navbar navbar-expand-lg fixed-top custom-nav sticky">
-            <div class="container">
-                <a class="navbar-brand pt-0 logo" href="#">
-                    <img src="logo.png" alt="" class="img-fluid logo-light">
-                    <img src="logo-dark.png" alt="" class="img-fluid logo-dark">
-                </a>
+    /* prompt input line */
+    .promptline { display: flex; align-items: baseline; gap: 0.5rem; margin-top: 0.7rem; }
+    .promptline .p { color: var(--accent); flex: none; }
+    #cmd {
+      flex: 1; background: transparent; border: 0; outline: 0;
+      font: inherit; color: var(--ink); caret-color: var(--accent);
+      padding: 0; min-width: 0;
+    }
+    #cmd::placeholder { color: var(--dim); opacity: 0.7; }
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="mdi mdi-menu"></span>
-                </button>
+    /* clickable command chips */
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.65rem; }
+    .chips button {
+      font: inherit; font-size: 12.5px; letter-spacing: 0.04em;
+      color: var(--ink); background: transparent;
+      border: 1.5px solid var(--ink); padding: 0.2rem 0.6rem;
+      cursor: pointer; transition: background .12s, color .12s;
+    }
+    .chips button:hover, .chips button:focus-visible {
+      background: var(--ink); color: var(--bg); outline: none; }
+    .chips .hint { align-self: center; color: var(--dim); font-size: 11.5px;
+      border: 0; padding: 0; cursor: default; }
 
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#services">Skills</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#client">Recomendations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#work">Portfolio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- End Navbar -->
+    @media (prefers-reduced-motion: reduce) { .win { animation: none; } }
+  </style>
+</head>
+<body>
+  <div class="win" id="win">
+    <div class="bar" aria-hidden="true">
+      <span class="dot"></span>
+      <span class="title">yazan.home</span>
+      <span class="geo">43.47°N 79.69°W · <span id="clock">--:--</span></span>
+    </div>
 
-        <!-- START HOME -->
-        <section class="section jarallax h-100vh" data-jarallax='{"speed": 0.2}' style="background-image: url('images/header-bg.jpg');"  id="home">
-            <div class="bg-overlay"></div>
-            <div class="header-table">
-                <div class="header-table-center">
-                    <div class="container position-relative z-index">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                <div class="text-center header-content mx-auto">
-                                    <h4 class="text-white first-title mb-4">Welcome</h4>
-                                    <h1 class="header-name text-white text-capitalize mb-0">I'M <span class="simple-text-rotate font-weight-bold">Yazan Qwasmi.,A ML developer.,A Leader.</span></h1>
-                                    <p class="text-white mx-auto header-desc mt-4">On a journey to make lasting impacts on the world.</p>
-                                    <div class="mt-4 pt-2">
-                                        <a href="https://docs.google.com/document/d/1IUYbiZ1PTWoICCDd8_BvN-Hr91Q0i_yiy--FP_H3FQs/edit?usp=sharing" class="btn btn-outline-custom btn-round">Take a look at my resume</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="scroll_down">
-                <a href="#about" class="scroll">
-                    <i class="text-white"></i>
-                </a>
-            </div>
-        </section>
-        <!-- END HOME -->
-        <script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us5.list-manage.com","uuid":"7f22acebfabe18fac57b84166","lid":"0526fad354","uniqueMethods":true}) })</script>
-                <!-- START ABOUT -->
-                <section class="section" id="about">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6">
-                                <div class="mt-3">
-                                    <img src="images/header-bg.jpg" alt="" class="img-fluid mx-auto d-block img-thumbnail">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="mt-3">
-                                    <h2><span class="font-weight-bold">About</span> Me</h2>
-                                    <h4 class="mt-4">Hello! <span class="text-custom font-weight-bold">Hey, I'm Yazan.</span></h4>
-                                    <p class="text-muted mt-4">I am a 15 year old student and innovator at the <a href="https://theksociety.com">The Knowledge Society</a> I am very passionate about AI/ML and Quantum computing. </p>
-                                    <p class="text-muted mt-2">I love to learn and experiment with cutting edge technologes to impact and help others.</p>
-                                    <p class="text-muted mt-2">Using my knowledge have made projects that i have found interesting like a  <a href="https://integrations.us-south.assistant.watson.cloud.ibm.com/web/public/244bcac9-0bf6-45ee-9bc6-fffbef23b808to">Interactive bot</a> using IBM watson to ease the strain COVID-19 has had on out healthcare system.</p>
-                                    <div>
-                                        <ul class="mb-0 about-social list-inline mt-4">
-                                            <li class="list-inline-item"><a href="https://github.com/yazanq1"><i class="fa fa-github"></i></a></li>
-                                            <li class="list-inline-item"><a href="https://medium.com/@yazan.qwasmi1"><i class="fa fa-medium"></i></a></li>
-                                            <li class="list-inline-item"><a href="https://www.linkedin.com/in/yazan-qwasmi-798368165/"><i class="fa fa-linkedin"></i></a></li>
-                                            <li class="list-inline-item"><a href="https://twitter.com/home"><i class="fa fa-twitter"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- END ABOUT -->
+    <div class="screen" id="screen">
+      <div id="log" aria-live="polite"></div>
 
-                <!-- START SERVICES -->
-                <section class="section bg-light" id="services">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                <div class="text-center">
-                                    <h2> <span class="font-weight-bold">What i am working on</span></h2>
-                                    <p class="text-muted mx-auto section-subtitle mt-3">A few areas i am currently looking into.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col-lg-4">
-                                <div class="text-center services-boxes rounded p-4 mt-4">
-                                    <div class="services-boxes-icon">
-                                        <i class="fas fa-brain fa-3x text-custom display-4"></i>
-                                    </div>
-                                    <div class="mt-4">
-                                        <h5 class="mb-0">Artificial intelligence</h5>
-                                        <div class="services-title-border"></div>
-                                        <p class="text-muted mt-3">Using cutting edge technology to make positive impact on the world .</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="text-center services-boxes rounded p-4 mt-4">
-                                    <div class="services-boxes-icon">
-                                        <i class="fas fa-school text-custom display-4"></i>
-                                    </div>
-                                    <div class="mt-4">
-                                        <h5 class="mb-0">Quantum computing</h5>
-                                        <div class="services-title-border"></div>
-                                        <p class="text-muted mt-3"> With new advancments in quantum computing making it more feasible for the average person to interact with it skiped my curiosity in learning and using the technology.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="text-center services-boxes rounded p-4 mt-4">
-                                    <div class="services-boxes-icon">
-                                        <i class=" text-custom display-4"></i>
-                                    </div>
-                                    <div class="mt-4">
-                                        <h5 class="mb-0">Web development</h5>
-                                        <div class="services-title-border"></div>
-                                        <p class="text-muted mt-3">I have worked on multiple websites presonaly and for organizations (including this one ;).</p>
-                                    </div>
+      <div class="promptline">
+        <span class="p" aria-hidden="true">$</span>
+        <input id="cmd" autocomplete="off" autocapitalize="off"
+               spellcheck="false" aria-label="terminal command"
+               placeholder="type a command, or tap below…" />
+      </div>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                        </div>
-                    </div>
-                </section>
-                <!-- END SERVICES -->
+      <div class="chips" id="chips">
+        <button data-cmd="about">about</button>
+        <button data-cmd="work">work</button>
+        <button data-cmd="projects">projects</button>
+        <button data-cmd="hobbies">hobbies</button>
+        <button data-cmd="contact">contact</button>
+        <span class="hint">or type 'help'</span>
+      </div>
+    </div>
+  </div>
 
-                <!-- START CLIENT -->
-                <section class="section" id="client">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                <div class="text-center">
-                                    <h2><span class="font-weight-bold">Recommendations</span></h2>
-                                    <p class="text-muted mx-auto section-subtitle mt-3">Recommendations from some of the people i have worked with.</p>
-                                </div>
-                            </div>
-                        </div>
-                       <div class="row mt-4 pt-4">
-                            <div class="col-lg-12">
-                                <div id="owl-demo" class="owl-carousel">
-                                    <div class="text-center testi_boxes mx-auto">
-                                        <div class="tam_testi_icon text-custom">
-                                            <i class="fa fa-quote-left"></i>
-                                        </div>
-                                        <div class="mt-2">
-                                            <div>
-                                              <!--  <img src="images/testi/testi-1.jpg" alt="" class="mx-auto img-thumbnail img-fluid d-block rounded-circle">-->
-                                            </div>
-                                            <p class="client_review font-italic mt-4 text-center text-muted">"Coming soon"</p>
-                                            <p class="client_name text-center mb-0 mt-4">- , <span class="font-weight-bold"></span></p>
-                                        </div>
-                                    </div>
-                                    <!--<div class="text-center testi_boxes mx-auto">
-                                        <div class="tam_testi_icon text-custom">
-                                            <i class="fa fa-quote-left"></i>
-                                        </div>
-                                        <div class="mt-2">
-                                            <div>
-                                                <img src="images/testi/testi-2.jpg" alt="" class="mx-auto img-thumbnail img-fluid d-block rounded-circle">
-                                            </div>
-                                            <p class="client_review font-italic mt-4 text-center text-muted">" The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here."</p>
-                                            <p class="client_name text-center mb-0 mt-4">- Ebony verty, <span class="font-weight-bold">Envato</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="text-center testi_boxes mx-auto">
-                                        <div class="tam_testi_icon text-custom">
-                                            <i class="fa fa-quote-left"></i>
-                                        </div>
-                                        <div class="mt-2">
-                                            <div>
-                                                <img src="images/testi/testi-3.jpg" alt="" class="mx-auto img-thumbnail img-fluid d-block rounded-circle">
-                                            </div>
-                                            <p class="client_review font-italic mt-4 text-center text-muted">" The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here."</p>
-                                            <p class="client_name text-center mb-0 mt-4">- Ebony verty, <span class="font-weight-bold">Envato</span></p>
-                                        </div>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- END CLIENT -->
-                <section class="section text-center bg-light" id="work">
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-12">
-                                        <div class="text-center">
-                                            <h2>My <span class="font-weight-bold">Works</span></h2>
-                                            <p class="text-muted mx-auto section-subtitle mt-3">Some projects i have done.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-5 ">
-                                    <ul class="col list-unstyled list-inline mb-0 text-uppercase work_menu" id="menu-filter">
-                                        <li class="list-inline-item"><a class="active" data-filter="*">All</a></li>
-                                        <li class="list-inline-item"><a class="" data-filter=".code">Code</a></li>
-                                        <li class="list-inline-item"><a class="" data-filter=".articles">Articles</a></li>
-                                        <li class="list-inline-item"><a class="" data-filter=".videos">Videos</a></li>
-                                        <li class="list-inline-item"><a class="" data-filter=".other">Other</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="container">
-                                <div class="row mt-4 work-filter" style="position: relative; height: 528.5625px;">
-                                    <div class="col-lg-4 work_item articals" style="position: absolute; left: 0px; top: 0px;">
-                                        <a href="https://medium.com/@yazan.qwasmi1/what-is-ai-and-its-different-sub-sects-ef41447f62cd">
-                                            <div class="work_box">
-                                                <div class="work_img">
-                                                    <img src="images/1.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                                </div>
-                                                <div class="work_detail">
-                                                    <p class="mb-2">ML 101</p>
-                                                    <h4 class="mb-0">Overview and explanation of different ML methods</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+  <script>
+  (function () {
+    var screen = document.getElementById('screen');
+    var log = document.getElementById('log');
+    var input = document.getElementById('cmd');
+    var chips = document.getElementById('chips');
 
-                                    <div class="col-lg-4 work_item code" style="position: absolute; left: 380px; top: 0px;">
-                                        <a href="https://github.com/yazanqwasmi/Alphabet_stock_-predictor">
-                                            <div class="work_box">
-                                                <div class="work_img">
-                                                    <img src="images/2.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                                </div>
-                                                <div class="work_detail">
-                                                    <p class="mb-2">Alphabet Stock Predictor code</p>
-                                                    <h4 class="mb-0">Using historical google stock data to predict future trade prices</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+    var LINKS = {
+      email: 'mailto:yazan.was2@gmail.com',
+      github: 'https://github.com/yazanqwasmi',
+      linkedin: 'https://www.linkedin.com/in/yazan-qwasmi/'
+    };
 
-                                    <div class="col-lg-4 work_item articals" style="position: absolute; left: 760px; top: 0px;">
-                                        <a href="https://yazanqwasmi.github.io/IBMwatsCOVID.html">
-                                            <div class="work_box">
-                                                <div class="work_img">
-                                                    <img src="images/11.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                                </div>
-                                                <div class="work_detail">
-                                                    <p class="mb-2">IBM Watson Chatbot For COVID-19 Pandemic</p>
-                                                    <h4 class="mb-0">Using the powerful NLP abilities of IBM watson for solving the COVID-19 disinformation crises</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+    // all copy below is written fresh — not lifted from the résumé
+    var C = {
+      whoami: function () {
+        return ''
+          + '<div class="name">Yazan Qwasmi</div>'
+          + '<div class="muted">electrical engineering @ mcmaster · builder</div>'
+          + '<blockquote class="quote">&ldquo;the mystery of human existence lies not in just '
+          + 'staying alive, but in finding something to live for.&rdquo;'
+          + '<cite>dostoevsky</cite></blockquote>';
+      },
+      help: function () {
+        return '<div class="block">commands: '
+          + '<span class="accent">about</span>, '
+          + '<span class="accent">work</span>, '
+          + '<span class="accent">projects</span>, '
+          + '<span class="accent">hobbies</span>, '
+          + '<span class="accent">contact</span>, '
+          + '<span class="accent">neofetch</span>, '
+          + '<span class="accent">clear</span>. '
+          + '<span class="muted">(tab completes, ↑ for history — and a few things aren\'t listed)</span></div>';
+      },
+      ls: function () { return '<div class="block muted">about  work  projects  hobbies  contact</div>'; },
+      about: function () {
+        return '<div class="block">i build across the whole stack, from PCBs, through GPU '
+          + 'kernels, up to the software running on top — i just love anything tech. right now '
+          + 'i\'m finishing electrical engineering at mcmaster (2027), picking up an IEEE paper '
+          + 'along the way. off the keyboard, i\'m probably outside, or touching grass in a '
+          + 'different timezone.</div>';
+      },
+      work: function () {
+        return '<div class="block">'
+          + entry('RBC · royal bank of canada', 'automation developer · 2026',
+              'built an AI copilot that searches years of past incidents and hands the on-call '
+              + 'engineer a likely fix. it runs retrieval over the internal knowledge base and '
+              + 'plugs straight into the tools support already uses. also folded four separate '
+              + 'production systems into one pipeline.')
+          + entry('serene technology group', 'software engineer · 2025 · remote',
+              'shipped react + typescript features across sprints, hardened the flaky data flows '
+              + 'behind them, and set up the CI that lints, tests, and deploys on every merge.')
+          + '</div>';
+      },
+      projects: function () {
+        return '<div class="block">'
+          + entry('autonomous electric vehicle', 'ros · c++ · jetson',
+              'taught a small electric car to see and place itself in the world with lidar and a '
+              + 'depth camera, then pick the widest gap ahead and steer through it on its own.')
+          + entry('fast neural nets on gpus', 'cuda · c++ · hpc',
+              'wrote GPU code by hand that beats nvidia\'s own sparse matrix library by ~1.5×, and '
+              + 'pruned a network down to a fifth of its compute without losing meaningful accuracy. '
+              + 'the whole forward pass is written from scratch, with zero ML frameworks.')
+          + entry('battery insight', 'edge to cloud ml · 1st place · IEEE ECCE 2026',
+              'a wireless battery brain that predicts state of charge from tiny models running '
+              + 'both on the device and in the cloud. took first at mcmaster\'s capstone expo and got '
+              + 'accepted to IEEE ECCE 2026.')
+          + '</div>';
+      },
+      hobbies: function () {
+        return '<div class="block">riding, hiking, paddle, tennis, swimming, and travelling '
+          + 'every chance i get.</div>';
+      },
+      contact: function () {
+        return '<div class="block">'
+          + '<a href="' + LINKS.email + '">email</a> · '
+          + '<a href="' + LINKS.github + '" target="_blank" rel="noopener">github</a> · '
+          + '<a href="' + LINKS.linkedin + '" target="_blank" rel="noopener">linkedin</a>'
+          + '</div>';
+      },
+      neofetch: function () {
+        var rows = [
+          ['os', 'human, v21'],
+          ['role', 'electrical engineer'],
+          ['uptime', 'online since 2026'],
+          ['editor', 'vim (still figuring out :q)'],
+          ['langs', 'c++, cuda, python, go, ts'],
+          ['location', 'oakville, on'],
+          ['timezone', 'america/toronto'],
+          ['now', 'yyz → somewhere soon']
+        ];
+        var out = '<div class="block fetch">';
+        for (var i = 0; i < rows.length; i++) {
+          out += '<div class="frow"><span class="fk">' + rows[i][0] + '</span>'
+            + '<span class="fv">' + rows[i][1] + '</span></div>';
+        }
+        return out + '</div>';
+      },
+      // easter eggs
+      sudo: function () { return '<div class="block muted">nice try. you already have root here.</div>'; },
+      coffee: function () { return '<div class="block muted">pouring a cup. brb.</div>'; },
+      vim: function () { return '<div class="block muted">:q ... :q! ... :wq ... how do i leave</div>'; },
+      ride: function () { return '<div class="block muted">somewhere between the barn and the finish line.</div>'; }
+    };
+    var ALIASES = { who: 'whoami', me: 'about', experience: 'work', exp: 'work',
+      cv: 'contact', links: 'contact', horses: 'hobbies', riding: 'hobbies',
+      hobbys: 'hobbies', '?': 'help', fetch: 'neofetch', sys: 'neofetch' };
+    var NAMES = ['about','work','projects','hobbies','contact','neofetch','help','clear','ls'];
 
-                                    <div class="col-lg-4 work_item newsletter" style="position: absolute; left: 0px; top: 263px;">
-                                        <a href="https://us5.campaign-archive.com/?e=&u=7f22acebfabe18fac57b84166&id=21b4662c82">
-                                            <div class="work_box">
-                                                <div class="work_img">
-                                                    <img src="images/4.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                                </div>
-                                                <div class="work_detail">
-                                                    <p class="mb-2">Newsletter</p>
-                                                    <h4 class="mb-0">December issue</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+    function entry(h, sub, d) {
+      return '<div class="entry"><div class="h">' + h + '</div>'
+        + '<div class="sub">' + sub + '</div>'
+        + '<div class="d">' + d + '</div></div>';
+    }
 
-                                    <div class="col-lg-4 work_item newsletter" style="position: absolute; left: 380px; top: 263px;">
-                                        <a href="https://mailchi.mp/f83bb9246cc7/november-newsletter">
-                                            <div class="work_box">
-                                                <div class="work_img">
-                                                    <img src="images/5.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                                </div>
-                                                <div class="work_detail">
-                                                    <p class="mb-2">Newsletter</p>
-                                                    <h4 class="mb-0">November issue</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+    var history = [], hpos = -1;
+    var cmdCount = 0, hinted = false;
+    var EGG_KEYS = { sudo: 1, coffee: 1, vim: 1, ride: 1, rm: 1 };
 
-                                    <div class="col-lg-4 work_item code" style="position: absolute; left: 760px; top: 263px;">
-                                        <a href="https://integrations.us-south.assistant.watson.cloud.ibm.com/web/public/244bcac9-0bf6-45ee-9bc6-fffbef23b808">
-                                            <div class="work_box">
-                                                <div class="work_img">
-                                                    <img src="images/6.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                                </div>
-                                                <div class="work_detail">
-                                                    <p class="mb-2">COVID-19 bot</p>
-                                                    <h4 class="mb-0">Try out my NLP bot using IBM watson</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-4 work_item articals" style="position: absolute; left: 760px; top: 0px;">
-                                        <a href="https://therealreboot.github.io/thereboot.github.io/">
-                                            <div class="work_box">
-                                                <div class="work_img">
-                                                    <img src="images/12.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                                </div>
-                                                <div class="work_detail">
-                                                    <p class="mb-2">Reboot Website</p>
-                                                    <h4 class="mb-0">the website of a company me and a few friends worked on.</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-4 work_item articals" style="position: absolute; left: 760px; top: 0px;">
-                                        <a href="https://github.com/yazanqwasmi/ML-Fake-news-classifier-/blob/master/README.md">
-                                            <div class="work_box">
-                                                <div class="work_img">
-                                                    <img src="images/13.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                                </div>
-                                                <div class="work_detail">
-                                                    <p class="mb-2">ML Fake news predictor</p>
-                                                    <h4 class="mb-0">Using the language structure of the articles we can get a good guess if the article is or is not bias towards one side on the story or outright providing false. </h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-4 work_item articals" style="position: absolute; left: 760px; top: 0px;">
-                                        <a href="https://github.com/yazanqwasmi/YOLO-object-classifier">
-                                            <div class="work_box">
-                                                <div class="work_img">
-                                                    <img src="images/14.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                                </div>
-                                                <div class="work_detail">
-                                                    <p class="mb-2"></p>
-                                                    <h4 class="mb-0">YOLO Object detection</h4>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-4 work_item other" style="position: absolute; left: 380px; top: 0px;">
-                                      <a href="images/7671ac07f0399edd2cda5d3f44b6d814.pdf" class="img-zoom">
-                                        <div class="work_box">
-                                          <div class="work_img">
-                                            <img src="images/7671ac07f0399edd2cda5d3f44b6d814.pdf" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                          </div>
-                                          <div class="work_detail">
-                                            <p class="mb-2">One pager</p>
-                                            <h4 class="mb-0">All about Reboot</h4>
-                                          </div>
-                                        </div>
-                                      </a>
-                                  </div>
-                                </div>
-                            </div>
-                        </section>
-                    
-                <!--START WORK
-                <section class="section bg-light text-center" id="work">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                <div class="text-center">
-                                    <h2>My <span class="font-weight-bold">Work</span></h2>
-                                    <p class="text-muted mx-auto section-subtitle mt-3">Some projects i have done.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-5 ">
-                            <ul class="col list-unstyled list-inline mb-0 text-uppercase work_menu" id="menu-filter">
-                                <li class="list-inline-item"><a class="active" data-filter="*">All</a></li>
-                                <li class="list-inline-item"><a class="" data-filter=".code">Code</a></li>
-                                <li class="list-inline-item"><a class="" data-filter=".articals">Articles</a></li>
-                                <li class="list-inline-item"><a class="" data-filter=".videos">Videos</a></li>
-                                <li class="list-inline-item"><a class="" data-filter=".newsletter">Newsletter</a></li>
-                                <li class="list-inline-item"><a class="" data-filter=".other">Other</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row mt-4 work-filter">
-                            <div class="col-lg-4 work_item  articals">
-                                <a href="https://medium.com/@yazan.qwasmi1/what-is-ai-and-its-different-sub-sects-ef41447f62cd">
-                                    <div class="work_box">
-                                        <div class="work_img">
-                                            <img src="images/1.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                        </div>
-                                        <div class="work_detail">
-                                            <p class="mb-2">ML 101</p>
-                                            <h4 class="mb-0">Overview of different ML methods</h4>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+    function maybeHint() {
+      if (hinted || cmdCount < 3) return;
+      hinted = true;
+      print('<div class="block muted">psst — not everything is in <span class="accent">help</span>. '
+        + 'try <span class="accent">sudo</span>, or <span class="accent">coffee</span> if it\'s late. '
+        + 'a few others are hiding too.</div>');
+    }
 
-                            <div class="col-lg-4 work_item code">
-                                <a href="https://github.com/yazanq1/google_stock_predic">
-                                    <div class="work_box">
-                                        <div class="work_img">
-                                            <img src="images/2.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                        </div>
-                                        <div class="work_detail">
-                                            <p class="mb-2">Google Stock Predictor code</p>
-                                            <h4 class="mb-0">Using historical google stock data to predict future prices</h4>
-                                        </div>
+    function print(html) {
+      var div = document.createElement('div');
+      div.className = 'line';
+      div.innerHTML = html;
+      log.appendChild(div);
+      screen.scrollTop = screen.scrollHeight;
+    }
 
-                                    </div>
-                                </a>
-                            </div>
+    function run(raw) {
+      var cmd = (raw || '').trim().toLowerCase();
+      if (!cmd) return;
+      history.push(cmd); hpos = history.length;
+      print('<div class="echo"><span class="p">$</span> ' + escapeHtml(cmd) + '</div>');
+      if (cmd === 'clear') { log.innerHTML = ''; boot(false); return; }
+      cmdCount++;
+      var out;
+      if (cmd === 'sudo' || cmd.indexOf('sudo ') === 0) { out = C.sudo(); hinted = true; }
+      else if (cmd === 'rm' || cmd.indexOf('rm ') === 0) {
+        out = '<div class="block muted">not on my watch.</div>'; hinted = true; }
+      else {
+        var key = ALIASES[cmd] || cmd;
+        if (C[key]) { out = C[key](); if (EGG_KEYS[key]) hinted = true; }
+        else { out = '<div class="block muted">' + escapeHtml(cmd)
+          + ': command not found. try <span class="accent">help</span>.</div>'; }
+      }
+      print(out);
+      maybeHint();
+    }
 
-                      <div class="row mt-4 work-filter">
-                            <div class="col-lg-4 work_item  articles">
-                                <a href="https://yazanqwasmi.github.io/IBMwatsCOVID.html">
-                                    <div class="work_box">
-                                        <div class="work_img">
-                                            <img src="images/11.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                        </div>
-                                        <div class="work_detail">
-                                            <p class="mb-2">IBM Watson Chatbot For COVID-19 Pandemic</p>
-                                            <h4 class="mb-0">Using the powerful NLP abilities of IBM watson for solving the COVID-19 disinformation crises </h4>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+    // live local clock (Toronto) + time-aware greeting
+    function torontoParts() {
+      try {
+        var f = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'America/Toronto', hour12: false,
+          hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        var p = {}; f.formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+        return p;
+      } catch (e) { return null; }
+    }
+    function tickClock() {
+      var el = document.getElementById('clock'); if (!el) return;
+      var p = torontoParts();
+      if (p) el.textContent = p.hour + ':' + p.minute + ':' + p.second;
+    }
+    function greeting() {
+      var p = torontoParts();
+      var h = p ? parseInt(p.hour, 10) : (new Date()).getHours();
+      if (h >= 5 && h < 12) return 'good morning';
+      if (h >= 12 && h < 17) return 'good afternoon';
+      if (h >= 17 && h < 22) return 'good evening';
+      if (h >= 1 && h < 5) return 'burning the midnight oil';
+      return 'still up?';
+    }
 
-                            <div class="col-lg-4 work_item articals">
+    function escapeHtml(s) {
+      return s.replace(/[&<>"]/g, function (c) {
+        return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; });
+    }
 
-                            </div>
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { run(input.value); input.value = ''; }
+      else if (e.key === 'ArrowUp') {
+        if (hpos > 0) { hpos--; input.value = history[hpos]; e.preventDefault(); }
+      } else if (e.key === 'ArrowDown') {
+        if (hpos < history.length - 1) { hpos++; input.value = history[hpos]; }
+        else { hpos = history.length; input.value = ''; }
+      } else if (e.key === 'Tab' && !e.shiftKey) {
+        var v = input.value.trim().toLowerCase();
+        var m = NAMES.filter(function (n) { return n.indexOf(v) === 0; });
+        if (v && m.length) { e.preventDefault(); input.value = m[0]; }
+        // else: let Tab move focus normally (no trap)
+      }
+    });
 
-                            <div class="col-lg-4 work_item newsletter">
-                                <a href="https://us5.campaign-archive.com/?e=&u=7f22acebfabe18fac57b84166&id=21b4662c82">
-                                    <div class="work_box">
-                                        <div class="work_img">
-                                            <img src="images/4.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                        </div>
-                                        <div class="work_detail">
-                                            <p class="mb-2">Newsletter</p>
-                                            <h4 class="mb-0">December issue</h4>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+    chips.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-cmd]');
+      if (!b) return;
+      run(b.getAttribute('data-cmd'));
+      input.focus();
+    });
 
-                            <div class="col-lg-4 work_item newsletter">
-                                <a href="https://mailchi.mp/f83bb9246cc7/november-newsletter">
-                                    <div class="work_box">
-                                        <div class="work_img">
-                                            <img src="images/5.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                        </div>
-                                        <div class="work_detail">
-                                            <p class="mb-2">Newsletter</p>
-                                            <h4 class="mb-0">November issue</h4>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+    // clicking anywhere on the screen focuses the prompt (unless selecting a link/text)
+    screen.addEventListener('click', function (e) {
+      if (e.target.closest('a, button')) return;
+      if (window.getSelection().toString()) return;
+      input.focus();
+    });
 
-                            <div class="col-lg-4 work_item code">
-                                <a href="https://integrations.us-south.assistant.watson.cloud.ibm.com/web/public/244bcac9-0bf6-45ee-9bc6-fffbef23b808">
-                                    <div class="work_box">
-                                        <div class="work_img">
-                                            <img src="images/6.jpg" class="img-fluid mx-auto d-block rounded" alt="work-img">
-                                        </div>
-                                        <div class="work_detail">
-                                            <p class="mb-2">COVID-19 bot</p>
-                                            <h4 class="mb-0">Try out my NLP bot using IBM watson</h4>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    function boot(intro) {
+      if (intro) {
+        print('<div class="echo" style="margin-top:0"><span class="p">#</span> ' + greeting() + '</div>');
+        print(C.whoami());
+      }
+      print('<div class="block muted" style="margin-top:.35rem">type <span class="accent">help</span> '
+        + 'or tap a command below.</div>');
+      screen.scrollTop = screen.scrollHeight;
+    }
 
-                </section>
-                END WORK -->
-
-                <!-- START BLOG -->
-
-                <!-- END BLOG -->
-                <!-- START CONTACT -->
-                <section class="section " id="contact">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                <div class="text-center">
-                                    <h2><span class="font-weight-bold">Contact</span> Me</h2>
-                                    <p class="text-muted mx-auto section-subtitle mt-3">Any questions or comments? Shoot me a message! Or sign up for my monthly newsletter to keep up to date on what i am doing <a href="http://eepurl.com/gODktv" target="_blank">Here</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col-lg-4">
-                                <div class="text-center">
-                                    <div>
-                                        <i class="fa fa-mobile fa-3x text-custom h1"></i>
-                                    </div>
-                                    <div class="mt-3">
-                                        <h5 class="mb-0 contact_detail-title font-weight-bold">Phone</h5>
-                                        <p class="text-muted">Available apon request </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="text-center">
-                                    <div>
-                                        <i class="fa fa-envelope fa-3x text-custom h1"></i>
-                                    </div>
-                                    <div class="mt-3">
-                                        <h5 class="mb-0 contact_detail-title font-weight-bold">Email me at</h5>
-                                        <p class="text-muted">yazan.qwasmi1@gmail.com</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="text-center">
-                                    <div>
-                                        <i class="fa fa-map-pin fa-3x text-custom h1"></i>
-                                    </div>
-                                    <div class="mt-3">
-                                        <h5 class="mb-0 contact_detail-title font-weight-bold">Based in</h5>
-                                        <p class="text-muted">Toronto</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col-lg-12">
-                                <div class="form-kerri">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group mt-2">
-                                                    <input name="name" id="name" type="text" class="form-control" placeholder="Your Name*" required="">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group mt-2">
-                                                    <input name="email" id="email" type="email" class="form-control" placeholder="Your Email*" required="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="form-group mt-2">
-                                                    <input type="text" class="form-control" id="subject" placeholder="Your Subject.." required="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="form-group mt-2">
-                                                    <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Your message..."></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12 text-right">
-                                                <input type="submit" class="btn btn-custom" value="Send Message">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- END CONTACT -->
-
-                <!--START FOOTER-->
-                <footer class="footer bg-light">
-                    <div class="container">
-                        <div class="row justify-content-center text-center">
-                            <div class="col-md-12">
-                                <div class="text-center text-white footer-alt">
-                                    <ul class="list-unstyled list-inline mb-3">
-                                      <li class="list-inline-item"><a href="https://github.com/yazanq1"><i class="fa fa-github"></i></a></li>
-                                      <li class="list-inline-item"><a href="https://medium.com/@yazan.qwasmi1"><i class="fa fa-medium"></i></a></li>
-                                      <li class="list-inline-item"><a href="https://www.linkedin.com/in/yazan-qwasmi-798368165/"><i class="fa fa-linkedin"></i></a></li>
-                                      <li class="list-inline-item"><a href="https://twitter.com/home"><i class="fa fa-twitter"></i></a></li>
-                                    </ul>
-                                    <p class="text-muted mb-0"> 2019 - 2020 &copy;Yazan Qwasmi</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-                <!--END FOOTER-->
-
-                <!-- Back To Top -->
-                <a href="#" class="back_top"> <i class="fa fa-chevron-up"> </i> </a>
-
-                <!-- JAVASCRIPTS -->
-                <script src="js/jquery.min.js"></script>
-                <script src="js/popper.min.js"></script>
-                <script src="js/bootstrap.min.js"></script>
-                <!--EASING JS-->
-                <script src="js/jquery.easing.min.js"></script>
-                <script src="js/scrollspy.min.js"></script>
-                <!--PORTFOLIO FILTER JS-->
-                <script src="js/isotope.js"></script>
-                <!-- Magnific Popup Js -->
-                <script src="js/jquery.magnific-popup.min.js"></script>
-                <!-- SWITCHER JS -->
-                <script src="js/switcher.js"></script>
-                <!--TEXT ROTETE-->
-                <script src="js/jquery.simple-text-rotator.js"></script>
-                <!-- OWL CAROUSEL -->
-                <script src="js/owl.carousel.min.js"></script>
-                <!--PARTICLES ANIMATE JS-->
-                <script src="js/particles.js"></script>
-                <script src="js/particles.app.js"></script>
-                <!-- PARALLAX JS -->
-                <script src="js/parallax.js"></script>
-                <!--CUSTOM JS-->
-                <script>
-                    window.watsonAssistantChatOptions = {
-                        integrationID: "fe772ccb-9583-4777-b0e7-cc484eda796e", // The ID of this integration.
-                        region: "us-south", // The region your integration is hosted in.
-                        serviceInstanceID: "63567e6a-a6a5-4c40-b4d4-e8df8b8669ec", // The ID of your service instance.
-                        onLoad: function(instance) { instance.render(); }
-                      };
-                    setTimeout(function(){
-                      const t=document.createElement('script');
-                      t.src="https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
-                      document.head.appendChild(t);
-                    });
-                  </script>
-                <script src="js/custom.js"></script>
-                <script>
-                    $(".simple-text-rotate").textrotator({
-                        animation: "fade",
-                        speed: 3500
-                    });
-                </script>
-            </body>
+    tickClock();
+    setInterval(tickClock, 1000);
+    boot(true);
+    var isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    if (!isTouch) input.focus({ preventScroll: true });
+  })();
+  </script>
+</body>
 </html>
