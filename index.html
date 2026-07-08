@@ -1,4 +1,44 @@
 <!doctype html>
+<!--
+                      ..........................
+                ...................................
+             .........................................
+           .............................................
+          ................................................
+         ..................................................
+        ....................................................
+        ......;%;%%%%%%%%%%%%%%%%%%%%%%%%%%%;%%..............
+        .....;%%%;;;;%%%%%%%%%%%%%%%%%%;;;;%%%%..............%
+        .....%%%%%%%%;;;%%%%%%%%%%%%;;;%%%%%%%%%............%%%
+        /....%%%%%%%%%%%%;%%%%%%%%;%%%%%%%%%%%%%%..........;%%%
+        //...%%%a@@`  '@%%//%%%%%%%%@`  '@@a%%%%%%........;%/%%
+        //...%@@@@@aaa@@@%//%%%%%%@@@@aaa@@@@@%%%%%......%%/%%
+        //...%%%%%%%%%%%%%//%%%%%%%%%%%%%%%%%%%%%%%%....%%/%%%
+         //..%%%%%%%%%%%%//%%%%%%%%%%%%%%%%%%%%%%%%%...%%/%%%
+          //.%%%%%%%%%%%%//%%%%%%%%%%%%%%%%%%%%%%%%%..%%/%%%
+           //%%%%%%%%%%%//%%%%%%%%%%%%%%%%%%%%%%%%%%..%/%%%
+            ;%%%%%%%%%%%//%%%%%%%%%;/%%%%%%%%%%%%%%%.%%%
+              %%%%%%%%%//%%%%%%%%%%%;/%%%%%%%%%%%%%%%%
+               %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%/
+                ;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%//
+                  %%%%%<<<<<<<<<<<<<<<<<%%%%%%%%%%;//
+                   %%%%%<<<<<<<<<<<<<<<%%%%%%%%%%;///
+                    %%%%%%%%%%%%%%%%%%%%%%%%%%%;/////
+                     %%%%%%%%%%%%%%%%%%%%%%%%;///////.
+                     /;%%%%%%%%%%%%%%%%%%%;////////....
+                     ///;%%%%%%%%%%%%%%;////////.........
+                   ...///////////////////////..............
+                 ........////////////////................,;;,
+              ,;............/////////.................,;;;;;;;;,
+          ,;;;;;;,................................,;;;;;;;;;;;;;;,
+      ,;;;;;;;;;;;;;,........................,;;;;;;;;;;;;;;;;;;;;
+  ,;;;;;;;;;;;;;;;;;;;;;,................,;;;;;;;;;;;;;;;;;;;;;;;;
+,;;;;;;;;;;;;;;;;;;;;;;;;;;,.........,;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;/#\;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;/####\;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;/#######\;;;;;;;
+
+  hi, you found this. -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -292,11 +332,16 @@
       sudo: function () { return '<div class="block muted">nice try. you already have root here.</div>'; },
       coffee: function () { return '<div class="block muted">pouring a cup. brb.</div>'; },
       vim: function () { return '<div class="block muted">:q ... :q! ... :wq ... how do i leave</div>'; },
-      ride: function () { return '<div class="block muted">somewhere between the barn and the finish line.</div>'; }
+      ride: function () { return '<div class="block muted">somewhere between the barn and the finish line.</div>'; },
+      'cd ..': function () { return '<div class="block muted">already at the top. this is as real as it gets.</div>'; },
+      ping: function () { return '<div class="block muted">pong. still here.</div>'; },
+      hostname: function () { return '<div class="block muted">yazan.local</div>'; },
+      ssh: function () { return '<div class="block muted">connection refused. i\'m right here.</div>'; },
+      exit: function () { return '<div class="block muted">nice try, there\'s no escaping this terminal.</div>'; }
     };
     var ALIASES = { who: 'whoami', me: 'about', experience: 'work', exp: 'work',
       cv: 'contact', links: 'contact', horses: 'hobbies', riding: 'hobbies',
-      hobbys: 'hobbies', '?': 'help', fetch: 'neofetch', sys: 'neofetch' };
+      hobbys: 'hobbies', '?': 'help', fetch: 'neofetch', sys: 'neofetch', quit: 'exit' };
     var NAMES = ['about','work','projects','hobbies','contact','neofetch','help','clear','ls'];
 
     function entry(h, sub, d) {
@@ -307,7 +352,8 @@
 
     var history = [], hpos = -1;
     var cmdCount = 0, hinted = false;
-    var EGG_KEYS = { sudo: 1, coffee: 1, vim: 1, ride: 1, rm: 1 };
+    var EGG_KEYS = { sudo: 1, coffee: 1, vim: 1, ride: 1, rm: 1,
+      'cd ..': 1, ping: 1, hostname: 1, ssh: 1, exit: 1 };
 
     function maybeHint() {
       if (hinted || cmdCount < 3) return;
